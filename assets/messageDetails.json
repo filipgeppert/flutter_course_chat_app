@@ -1,0 +1,24 @@
+{
+  "12345": {
+    "avatar": "avatar url",
+    "messages": [
+      {
+      "type": "string",
+      "content": "hey",
+      "from": "friend",
+      "display_name": "Thanos"
+      },
+      {
+        "type": "image/url",
+        "content": "https://example.com",
+        "from": "friend",
+        "display_name": "Thanos"
+      },
+      {
+        "type": "string",
+        "content": "hey friend",
+        "from": "me"
+      }
+    ]
+  }
+}

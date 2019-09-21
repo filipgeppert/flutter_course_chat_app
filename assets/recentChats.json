@@ -1,0 +1,12 @@
+{
+  "12345": {
+    "avatar": "avatar url",
+    "last_message":
+      {
+      "type": "string",
+      "content": "hey",
+      "from": "friend",
+      "timestamp": 1234556547657,
+      },
+  },
+}
