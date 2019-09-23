@@ -10,12 +10,14 @@ class ChatHead extends StatefulWidget {
   final String friendName;
   final String lastMessage;
   final DateTime messageTime;
+  final String friendId;
 
   ChatHead({
     Key key,
     this.friendName: "",
     this.lastMessage: "",
     this.messageTime,
+    this.friendId,
   }) : super(key: key);
 }
 
@@ -30,6 +32,7 @@ class _ChatHeadState extends State<ChatHead> {
             return ChatView(
               friendName: widget.friendName,
               lastMessage: widget.lastMessage,
+              friendId: widget.friendId,
             );
           },
           fullscreenDialog: true

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_course_safari/ChatMessages.dart';
 import 'dart:convert';
+import 'package:flutter_app_course_safari/Helper.dart';
 
 class ChatView extends StatefulWidget {
 
-  ChatView({Key key, this.friendName: "", this.lastMessage: ""})
+  ChatView({Key key, this.friendName: "", this.lastMessage: "", this.friendId,})
       : super(key: key);
 
   @override
@@ -12,7 +13,7 @@ class ChatView extends StatefulWidget {
 
   final String friendName;
   final String lastMessage;
-
+  final String friendId;
 }
 
 class _ChatViewState extends State<ChatView> {
@@ -24,13 +25,12 @@ class _ChatViewState extends State<ChatView> {
       setState(() {
         _friendInitial = widget.friendName.substring(0,1);
       });
-
       super.initState();
     }
   
   @override
   Widget build(BuildContext context) {
-    loadMessageDetails();
+    int _index = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.friendName)
@@ -38,18 +38,21 @@ class _ChatViewState extends State<ChatView> {
       body: Column(
         children: <Widget>[
           Flexible(
+            // Future builder class is used to asynchronously load content
+            // It will execute once data comes.
             child: FutureBuilder(
-              future: loadMessageDetails(),
+              future: loadJsonFileAsMap(context,
+                  'assets/messageDetails.json'),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
+                List<ChatMessages> chatMessageWidgets = List();
                 if(snapshot.connectionState == ConnectionState.done) {
                   if(snapshot.hasData){
-                    List<ChatMessages> chatMessageWidgets = List();
-                    List<dynamic> chatMessagesList = snapshot.data;
-                    int _index = 0;
+                    List<dynamic> chatMessagesList = snapshot.data[widget.friendId]['messages'];
+                    print(chatMessagesList);
                     chatMessagesList.forEach((_message){
                         chatMessageWidgets.add(ChatMessages(
                           isFriend: true,
-                          isNotPrevious: chatMessagesList.length - 1 == _index,
+                          isNotPrevious: chatMessagesList.length -1 == _index,
                           message: _message['content'],
                           friendInitial: "T",
                         ));
@@ -97,31 +100,6 @@ class _ChatViewState extends State<ChatView> {
         ],
       ),
       );
-  }
-
-  Future<List> loadMessageDetails () async {
-    String messageDetailsString = await DefaultAssetBundle.of(context)
-        .loadString('assets/messageDetails.json');
-        Map<String, dynamic> mappedMessages = json.decode(messageDetailsString);
-
-        List<dynamic> messages = mappedMessages['12345']['messages'];
-
-    return messages;
-    }
-
-  List<Widget> getMessages () {
-    List<Widget> tempList = List();
-    tempList.add(Text('No messages found'));
-
-    loadMessageDetails().then((_value){
-      if(_value!=null){
-
-
-      } else {
-
-      }
-    });
-    return tempList;
   }
 }
 

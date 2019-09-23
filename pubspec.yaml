@@ -45,6 +45,8 @@ flutter:
   assets:
     - assets/messageDetails.json
     - assets/recentChats.json
+    - assets/images/57.jpg
+    - assets/images/95.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

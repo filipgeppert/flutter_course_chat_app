@@ -1,12 +1,24 @@
 {
   "12345": {
-    "avatar": "avatar url",
+    "avatar": "assets/images/57.jpg",
+    "display_name": "Fifi",
     "last_message":
       {
       "type": "string",
       "content": "hey",
       "from": "friend",
-      "timestamp": 1234556547657,
-      },
+      "timestamp": 1569069899739
+      }
   },
+  "12346": {
+    "avatar": "assets/images/95.jpg",
+    "display_name": "Jolo",
+    "last_message":
+    {
+      "type": "string",
+      "content": "hey",
+      "from": "friend",
+      "timestamp": 1569069899739
+    }
+  }
 }

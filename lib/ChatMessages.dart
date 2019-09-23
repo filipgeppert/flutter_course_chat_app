@@ -8,6 +8,7 @@ class ChatMessages extends StatefulWidget {
   final bool isNotPrevious;
   final String message;
   final String friendInitial;
+  final String avatarUrl;
 
   ChatMessages({
     Key key,
@@ -15,6 +16,7 @@ class ChatMessages extends StatefulWidget {
     this.isNotPrevious: true,
     this.message: "",
     this.friendInitial,
+    this.avatarUrl,
   }) : super(key: key);
 }
 
@@ -23,18 +25,22 @@ class _ChatMessagesState extends State<ChatMessages> {
   Widget build(BuildContext context) {
     return Container(
       height: 100.0,
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(4.0),
       width: double.infinity,
       color: Colors.grey[300],
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          widget.isFriend && widget.isNotPrevious ?
-          CircleAvatar(
-            radius: 34.0,
-            backgroundColor: Colors.white,
-            child: Text(widget.friendInitial),
-          ) : Container(),
+          SizedBox(
+            width: 40.0,
+            child: widget.isFriend && widget.isNotPrevious ?
+            CircleAvatar(
+              backgroundImage: Image.asset('assets/images/57.jpg').image,
+              radius: 20.0,
+              backgroundColor: Colors.white,
+              child: Text(widget.friendInitial),
+            ) : Container(),
+          ),
           Expanded(child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(widget.message)
@@ -42,7 +48,8 @@ class _ChatMessagesState extends State<ChatMessages> {
           ),
           !widget.isFriend  && widget.isNotPrevious ?
           CircleAvatar(
-            radius: 34.0,
+            backgroundImage: Image.asset('assets/images/57.jpg').image,
+            radius: 20.0,
             backgroundColor: Colors.white,
             child: Text("U"),
           ): Container(),
